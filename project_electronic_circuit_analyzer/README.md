@@ -1,4 +1,4 @@
-# stepin_electronic_circuit_analyzer
+# electronic_circuit_analyzer
 ![Code quality score](https://www.code-inspector.com/project/27511/score/svg)
 ![Code grade](https://www.code-inspector.com/project/27511/status/svg)
 ![Codacy Badge](https://api.codacy.com/project/badge/Grade/b49228005147402387676efb61fc0422)
