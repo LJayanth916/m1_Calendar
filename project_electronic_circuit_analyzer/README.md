@@ -3,11 +3,6 @@
 ![Code grade](https://www.code-inspector.com/project/27511/status/svg)
 ![Codacy Badge](https://api.codacy.com/project/badge/Grade/b49228005147402387676efb61fc0422)
 
-
-[![Unit testing](https://github.com/saivikas9490/stepin_electronic_circuit_analyzer/actions/workflows/unit-test.yml/badge.svg)](https://github.com/saivikas9490/stepin_electronic_circuit_analyzer/actions/workflows/unit-test.yml)
-[![Cpp-check](https://github.com/saivikas9490/stepin_electronic_circuit_analyzer/actions/workflows/cppcheck.yml/badge.svg)](https://github.com/saivikas9490/stepin_electronic_circuit_analyzer/actions/workflows/cppcheck.yml)
-[![GitInspector](https://github.com/saivikas9490/stepin_electronic_circuit_analyzer/actions/workflows/gitinspector.yml/badge.svg)](https://github.com/saivikas9490/stepin_electronic_circuit_analyzer/actions/workflows/gitinspector.yml)
-
 ## Folder Structure
 Folder               | Description
 ---------------------| -----------------------------------------
@@ -18,9 +13,9 @@ Folder               | Description
 
 ## Contributors List and Summary
 
-PS No.     |  Name               |    Features                      | Issuess Raised |Issues Resolved |No of Test Cases|Test Cases Passed
------------|---------------------|----------------------------------|----------------|----------------|----------------|-----------------
-`99006251` | Sai Vikas           |  Mentioned Below (F1,F2,F3F4,F5) |  3             |  3             | 3              | 3      
+|  Name               |    Features                      | Issuess Raised |Issues Resolved |No of Test Cases|Test Cases Passed
+|---------------------|----------------------------------|----------------|----------------|----------------|-----------------
+ | L Jayanth          |  Mentioned Below (F1,F2,F3F4,F5) |  3             |  3             | 3              | 3      
 
 ## Features
 Feature  | Description
@@ -37,7 +32,7 @@ Feature  | Description
          - The challenge was overcome by using typedef, globally declaring structures and passing pointers as arguments in functions.
 
 2.  ### To manage time with internship and building and learning the project workflows and github 
-         - The challenge was overcome by managing time and starting the day early with tutorals, looking at github accounts for  reference and coding at night after learning from various external sites.
+         - The challenge was overcome by managing time and starting the day early with tutorials, looking at github accounts for  reference and coding at night after learning from various external sites.
 
-3.  ### To impleent unit test cases for the first time 
-         - The challenge was overcome by watching tutorials, reffering to L&T platforms like Futureskills.
+3.  ### To implement unit test cases for the first time 
+         - The challenge was overcome by watching tutorials, reffering to digital platforms. 
