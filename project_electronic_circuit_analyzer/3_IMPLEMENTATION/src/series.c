@@ -1,161 +1,109 @@
 #include "fun.h"
-
-double series(int res, MainMenu *inductance, MainMenu *capacitance, MainMenu *frequency, MainMenu *resistance){
-    /**
-     * @brief Case 1 for known and unknown series resistance values for a resistive circuit
-     * 
-     */
+double series(int res, Mm*ind, Mm *cap, Mm*fre, Mm*resi){
     if(res == 1){
-        //user input
         printf("Enter number of resistors : ");
-        scanf("%d",&resistance->number);
-        printf(" Do you know the values of the resistors?(1.y/2.n): ");
-        scanf("%d",&resistance->days);
-        resistance->reactance = 0;
-        // calculating resistance values based on user knowledge
-        switch(resistance->days){
-            // user knows the values
-            case 1:   for(int i=0;i<resistance->number;i++){
+        scanf("%d",&resi->number);
+        printf(" Do you know the values of the resistors?(1.yes/2.no): ");
+        scanf("%d",&resi->days);
+        resi->rea = 0;
+        switch(resi->days){
+            case 1:   for(int i=0;i<resi->number;i++){
                             printf("Enter value for resistor[%d] : ",i+1);
-                            scanf("%lf",&resistance->array[i]);
+                            scanf("%lf",&resi->array[i]);
                             printf("Enter the power of the units(for example: for kohm enter 3): ");
-                            scanf("%lf",&resistance->units);
-                            resistance->reactance += (resistance->array[i] * pow(10,(resistance->units)));
+                            scanf("%lf",&resi->units);
+                            resi->rea += (resi->array[i] * pow(10,(resi->units)));
                         }
             break;
-            //user does not know the values
-            case 2:   for(int i=0;i<resistance->number;i++){
-                /* Calculate the values based on the resistor bands: 4 and 5 bands */
+            case 2:   for(int i=0;i<resi->number;i++){
                             printf(" Enter the number of bands in resistor[%d}: ",i+1);
-                            scanf("%lf",&resistance->units);
-                            if(resistance->units == 4){
-                                resistance->array[i] = reg4band();
-                                resistance->reactance += resistance->array[i];
+                            scanf("%lf",&resi->units);
+                            if(resi->units == 4){
+                                resi->array[i] = reg4band();
+                                resi->rea += resi->array[i];
                             }
-                            else if(resistance->units == 5){
-                                resistance->array[i] = reg5band();
-                                resistance->reactance += resistance->array[i];
+                            else if(resi->units == 5){
+                                resi->array[i] = reg5band();
+                                resi->rea += resi->array[i];
                             }
                         }
                         break;
             default: printf("Invalid Input, restart the program\n");
             break;
         }
-        // Print the total resistance and current values
-        printf("Total Series resistance accross the circuit : %0.9lf ohms\n", resistance->reactance);
-        Sres = resistance->reactance;
+        printf("Total Series resi accross the circuit : %0.9lf ohms\n", resi->rea);
+        Sres = resi->rea;
         printf(" Enter the voltage supplied to the circuit to find the current: ");
-        scanf("%lf",&resistance->voltage);
+        scanf("%lf",&resi->voltage);
         printf("The current (in amperes) throught the circuit is: ");
-        return (resistance->voltage/resistance->reactance);
+        return (resi->voltage/resi->rea);
     }
-    /**
-     * @brief Case 2 series inductance calculation with known inductance values
-     * 
-     * @return else 
-     */
     else if(res == 2){
-        //user input
         printf("Enter number of Inductors : ");
-        scanf("%d",&inductance->number);
-        printf("Enter frequency: ");
-        scanf("%lf",&frequency->val);
+        scanf("%d",&ind->number);
+        printf("Enter fre: ");
+        scanf("%lf",&fre->val);
         printf("Enter the power of the units(for example: for KHz enter 3): ");
-        scanf("%lf",&frequency->units);
+        scanf("%lf",&fre->units);
         printf("\n");
-        inductance->reactance = 0;
-        for(int i=0;i<inductance->number;i++){
+        ind->rea = 0;
+        for(int i=0;i<ind->number;i++){
             printf("[%d] : ",i+1);
-             printf("Enter Inductance value: ");
-            scanf("%lf",&inductance->val);
+             printf("Enter ind value: ");
+            scanf("%lf",&ind->val);
             printf("Enter the power of the units(for example: for microHenry enter -6): ");
-            scanf("%lf",&inductance->units);
-            // inductance calculation stored in array then stored in the reactance variable of the structure pointer
-            // same process followed for resistor and capacitor
-            inductance->array[i] = inductor(frequency->val,inductance->val,frequency->units,inductance->units);
-            inductance->reactance += inductance->array[i];
+            scanf("%lf",&ind->units);
+            ind->array[i] = inductor(fre->val,ind->val,fre->units,ind->units);
+            ind->rea += ind->array[i];
         }
-        printf("Total Series Inductance accross the circuit : %0.9lf ohms\n", inductance->reactance);
-        Sres = inductance->reactance;
+        printf("Total Series ind accross the circuit : %0.9lf ohms\n", ind->rea);
+        Sres = ind->rea;
         printf(" Enter the voltage supplied to the circuit to find the current: ");
-        scanf("%lf",&inductance->voltage);
+        scanf("%lf",&ind->voltage);
         printf("\n");
         printf("The current (in amperes) throught the circuit is: ");
-        /**
-         * @brief current value returned
-         * 
-         */
-        return (inductance->voltage/inductance->reactance);
+        return (ind->voltage/ind->rea);
     }
-    /**
-     * @brief Case 3: Capacitor series calculation, formula used will be similar to that of a resistor in paralell
-     * 
-     * @return else 
-     */
     else if(res == 3){
-        //user input
         printf("Enter number of Capacitors : ");
-        scanf("%d",&capacitance->number);
+        scanf("%d",&cap->number);
         printf("\n");
-        capacitance->reactance = 0;
-        for(int i=0;i<capacitance->number;i++){
+        cap->rea = 0;
+        for(int i=0;i<cap->number;i++){
             printf("[%d] : ",i+1);
-            capacitance->array[i] = capacitor(frequency->val,capacitance->val,frequency->units,capacitance->units);
-            capacitance->reactance += 1/(capacitance->array[i]);
+            cap->array[i] = capacitor(fre->val,cap->val,fre->units,cap->units);
+            cap->rea += 1/(cap->array[i]);
         }
-        // overall resistance in series
-        capacitance->reactance = pow(capacitance->reactance,-1);
-        printf("Total Series Capacitance accross the circuit : %0.9lf ohms\n", capacitance->reactance);
-        Sres = capacitance->reactance;
+        cap->rea = pow(cap->rea,-1);
+        printf("Total Series cap accross the circuit : %0.9lf ohms\n", cap->rea);
+        Sres = cap->rea;
         printf(" Enter the voltage supplied to the circuit to find the current: ");
-        scanf("%lf",&capacitance->voltage);
+        scanf("%lf",&cap->voltage);
         printf("\n");
         printf("The current (in amperes) throught the circuit is: ");
-        /**
-         * @brief return the current value
-         * 
-         */
-        return (capacitance->voltage/capacitance->reactance);
+        return (cap->voltage/cap->rea);
     }
     else if(res == 4){
-        /**
-         * @brief Function call for Series RLC circuit value calculation based on the below mentioned input parameters
-         * 
-         */
-        printf("Enter Equivalent Resistance value: ");
-        scanf("%lf",&resistance->val);
-
+        printf("Enter Equivalent resi value: ");
+        scanf("%lf",&resi->val);
         printf("Enter the power of the units(for example: for kohm enter 3): ");
-        scanf("%lf",&resistance->units);
-
-        printf("Enter Equivalent Inductance value: ");
-        scanf("%lf",&inductance->val);
-
+        scanf("%lf",&resi->units);
+        printf("Enter Equivalent ind value: ");
+        scanf("%lf",&ind->val);
         printf("Enter the power of the units(for example: for microHenry enter -6): ");
-        scanf("%lf",&inductance->units);
-
-        printf("Enter Equivalent capacitance value: ");
-        scanf("%lf",&capacitance->val);
-
+        scanf("%lf",&ind->units);
+        printf("Enter Equivalent cap value: ");
+        scanf("%lf",&cap->val);
         printf("Enter the power of the units(for example: for microfarad enter -6): ");
-        scanf("%lf",&capacitance->units);
-
-        printf("Enter Equivalent frequency: ");
-        scanf("%lf",&frequency->val);
-
+        scanf("%lf",&cap->units);
+        printf("Enter Equivalent fre: ");
+        scanf("%lf",&fre->val);
         printf("Enter the power of the units(for example: for KHz enter 3): ");
-        scanf("%lf",&frequency->units);
-
+        scanf("%lf",&fre->units);
         printf("Enter voltage accross the circuit(enter 0 if you know only current): ");
-
-        scanf("%lf",&resistance->voltage);
-    
+        scanf("%lf",&resi->voltage);
         printf("\n\n");
-        /**
-         * @brief return RLC serie current value
-         * 
-         */
-        return RLC(1, inductance, capacitance, frequency, resistance);
+        return RLC(1, ind, cap, fre, resi);
     }
     else{
         printf("Invalid Input, restart the program\n");
